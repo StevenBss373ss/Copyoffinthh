@@ -1,0 +1,84 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="ie6 oldie"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7 oldie"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8 oldie"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="">
+<!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GeoTrax</title>    
+    <link href="styles.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" 
+src="http://maps.google.com/maps?file=api&amp;&v=2.x&key=ABQIAAAA-O3c-Om9OcvXMOJXreXHAxT2MGhLvOJt8GrjSUL43OmcjQmGtxTaPEpHKK2neSdfBYbnzoxnoZ7Sww"></script>
+    <script type="text/javascript" src="polyline.js"></script>
+   
+<link href="boilerplate.css" rel="stylesheet" type="text/css">
+<link href="fluid.css" rel="stylesheet" type="text/css">
+
+<!-- 
+
+To learn more about the conditional comments around the html tags at the top of the file:
+paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+
+Do the following if you're using your customized build of modernizr (http://www.modernizr.com/):
+* insert the link to your js here
+* remove the link below to the html5shiv
+* add the "no-js" class to the html tags at the top
+* you can also remove the link to respond.min.js if you included the MQ Polyfill in your modernizr build 
+-->
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<script src="respond.min.js"></script>
+</head>
+<body onLoad="createMap()" onUnload="GUnload()"> 
+<div class="gridContainer clearfix">
+  <div id="a1">Click the button to get your coordinates:</p>
+<button onclick="getLocation()">Try It</button>
+<script>
+var x=document.getElementById("demo");
+function getLocation()
+  {
+  
+    
+    navigator.geolocation.getCurrentPosition(showPosition);
+    
+ 
+  }
+function showPosition(position)
+  {
+  x.innerHTML="Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude;	
+  }
+</script>
+  </div>
+  <div id="a2">
+  <form method="post" action="javascript:void(0)" onSubmit="centerMap()">
+  <br>
+  Center map at: <input type="text" id="txtAddress">
+  <input type="submit" value="Search">
+  </form><div id="map"></div><br>
+  </div>
+  
+  <div id="a3"> 
+   Lat:<input id="txtLatitude" type="text" class="inputField">
+   Long:<input id="txtLongitude" type="text" class="inputField">
+   <input type="button" value="Add Point" onClick="addPoint();copyAllPoints()">
+   </div>
+  <div id="a4"><br>
+<b>Point list</b><br>
+<select id="pointList" size="14" onChange="highlight(this.selectedIndex)"
+  ondblclick="jumpToPoint()"></select>
+<br><br>
+<input type="button" value="Delete Selected Point" onClick="deletePoint();copyAllPoints()">
+<input type="button" value="Delete All Points" onClick="deleteAllPoints();copyAllPoints()">
+</div>
+
+  
+<br>
+ 
+</div>
+</body>
+</html>
